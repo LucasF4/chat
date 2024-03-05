@@ -552,6 +552,14 @@ video {
   display: none;
 }
 
+.h-\[200px\] {
+  height: 200px;
+}
+
+.w-\[200px\] {
+  width: 200px;
+}
+
 .resize {
   resize: both;
 }
@@ -562,6 +570,21 @@ video {
 
 .border {
   border-width: 1px;
+}
+
+.bg-\[blue\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 255 / var(--tw-bg-opacity));
+}
+
+.bg-\[lightblue\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(173 216 230 / var(--tw-bg-opacity));
+}
+
+.bg-\[pink\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 192 203 / var(--tw-bg-opacity));
 }
 
 .bg-\[red\] {
