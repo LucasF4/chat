@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .online{
+            color: green;
+            font-weight: bold;
+        }
+
+        .offline{
+            color: red;
+            font-weight: bold;
+        }
+
+        .message-input {
+            width: calc(100% - 200px); /* Subtrai a largura das margens do campo de entrada */
+            margin-right: 10px;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            resize: none;
+            border-radius: 5px;
+            min-height: 52px;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-family: inherit;
+            overflow: hidden;
+        }
+
+        .send-button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .mymessage{
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap-reverse;
+            margin: 10px;
+            font-size: 20px;
+            /* float: right; */
+        }
+
+        .mymessage2 {
+            background-color: #d3e6fd; padding: 10px; border-radius: 5px;
+        }
+
+        .outhermessage{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: 10px; 
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 20px;
+            /* float: left; */
+        }
+
+        .outhermessage2 {
+            background-color: #fff; padding: 10px; border-radius: 5px;
+        }
+
+        #chat{
+            overflow-y: auto;
+            background-color: rgb(34, 49, 74);
+            width: 50%;
+        }
+
+        #username {
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        #chat-form {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: rgb(34, 49, 74);
+            padding: 15px;
+            width: 50%;
+        }
+
+    </style>
+</head>
+<body style="width: 100%;">
+    <main style="height: 90vh; display: flex; flex-direction: column;" >
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Tela do usuário</h1>
+            <a href="/logout">Sair</a>
+            
+        </div>
+        <div class="">
+            <p>Bem-Vindo, usuário: <%= user.name %></p>
+            <br>
+        </div>
+        
+        <div style=" display: flex; width: 100%; height: 100%; gap: 20px;">
+            <div >
+                <h3>Contatos: </h3>
+                <hr>
+                <% if(friends != undefined || friends != null){ %>
+                    <% friends.forEach(function(friend){ %>
+                        <div class="friend_id" user="<%= friend.name %>" data-id="<%= friend._id %>">
+                            <p><%= friend.name %></p> 
+                            <% if(friend.is_online == '1'){ %> 
+                                <p class="online" id="<%= friend._id %>-status">Online</p>
+                            <% }else{ %>
+                                <p class="offline" id="<%= friend._id %>-status">Offline</p>
+                            <% } %>
+                        </div>
+                        <hr>
+                    <% }) %>
+                <% }else{ %>
+                    <p>Não há usuários</p>
+                <% } %>
+            </div>
+
+            <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
+                <div style="margin: 0 auto;" id="username"></div>
+                <div style="height: 100%; padding: 20px; margin: 0 auto;" id="chat"></div>
+                <form id="chat-form" style="margin: 0 auto;">
+                    <textarea rows="1" cols="0" class="message-input" id="message" placeholder="Enter Message" type="text"></textarea>
+                    <input class="send-button" type="submit" value="Send Your Message">
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        var user_id = '<%= user._id %>'
+        var received_id;
+        $(document).ready(function(){
+            $('#chat').hide()
+            $('#chat-form').hide()
+
+            $('.friend_id').click(function(){
+                var id = $(this).attr('data-id')
+                $('#username').text($(this).attr('user'))
+                received_id = id
+                //$('#nome-client').append('Teste')
+                $('#chat').show()
+                $('#chat-form').show()
+                socket.emit('existsChat', {send_id: '<%= user._id %>', receive_id: received_id})
+            })
+
+        })
+
+        var socket = io({
+            auth: {
+                token: '<%= user._id %>'
+            }
+        })
+
+        socket.on('getOnlineUser', function(data){
+            $('#'+data.user_id+'-status').text('Online')
+            $('#'+data.user_id+'-status').removeClass('offline')
+            $('#'+data.user_id+'-status').addClass('online')
+        })
+
+        socket.on('getOfflineUser', function(data){
+            $('#'+data.user_id+'-status').text('Offline')
+            $('#'+data.user_id+'-status').removeClass('online')
+            $('#'+data.user_id+'-status').addClass('offline')
+        })
+
+        //Chat save of user
+        $('#chat-form').submit(function(event){
+          event.preventDefault()
+
+          var message = $('#message').val()
+
+          $.ajax({
+            url: '/save-messages',
+            type: 'POST',
+            data: {
+                sender_id: '<%= user._id %>',
+                received_id: received_id,
+                message: message
+            },
+            success: function(response) {
+                console.log(response)
+
+                if(response.data.send_id == user_id){
+                    var className = 'mymessage'
+                }else{
+                    var className = 'outhermessage'
+                }
+                
+                if(response.success){
+                    $('#message').val('')
+                    var chat = response.data.message
+                    var html = `
+                        <div class="${className}">
+                            <div class="${className}2">
+                                <h5>${chat}</h5>
+                            </div>
+                        </div>
+                    `
+                    $('#chat').append(html)
+                    scrollChat()
+                    document.getElementById('message').style.height = '56px';
+                    socket.emit('newChat', response.data)
+
+                }else{
+                    alert(response.msg)
+                }
+            }
+          })
+        });
+
+        socket.on('loadNewChat', function(res){
+            console.log('------- aqui -------')
+            console.log(res)
+            
+            if(
+                user_id === res.receive_id && received_id ==  res.send_id
+            ){
+
+                if(res.send_id == user_id){
+                    var className = 'mymessage'
+                }else{
+                    var className = 'outhermessage'
+                }
+                
+                let html = `
+                    <div class="${className}">
+                        <div class="${className}2">
+                            <h5>${res.message}</h5>
+                        </div>
+                    </div>
+                `
+                $('#chat').append(html)
+                
+                scrollChat()
+                //socket.emit('notification', {not: true})
+            }
+        })
+
+        socket.on('oldChat', function(data){
+            $('#chat').html('')
+
+            var chats = data.chat
+            let html='';
+
+            console.log(chats)            
+
+            for(let i = 0; i < chats.length; i++){
+                
+                console.log('data.send_id: ', chats[i].send_id)
+                console.log('user_id: ', user_id)
+                if(chats[i].send_id == user_id){
+                    var className = 'mymessage'
+                }else{
+                    var className = 'outhermessage'
+                }
+                html += `
+                    <div class="${className}">
+                        <div class="${className}2"><h5>${chats[i]['message']}</h5></div>
+                    </div>
+                `
+            }
+
+            $('#chat').append(html)
+
+            scrollChat()
+        })
+
+        function scrollChat (){
+            $("#chat").animate({
+                scrollTop: $('#chat').offset().top + $('#chat')[0].scrollHeight
+            })
+        }
+
+        const textarea = document.getElementById('message');
+
+        textarea.addEventListener('input', () => {
+        textarea.style.height = 'auto'; // Redefine a altura para auto para que a altura seja recalculada corretamente
+        textarea.style.height = textarea.scrollHeight + 'px'; // Define a altura para a altura do conteúdo
+        scrollChat()
+        });
+
+        addEventListener('keypress', function (event){
+            console.log(event)
+        })
+    </script>
+</body>
+</html>
