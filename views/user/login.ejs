@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="/src/css/output.css" rel="stylesheet">
-</head>
-<body>
-    <h1>Tela de login</h1>
+    <%- include('../partials/links-head.ejs'); %>
+  </head>
+  <body class="">
     <%if(erro){%>
-        <div class="alert alert-danger" role="alert">
-          <%=erro%>
+    <div class="alert alert-danger" role="alert"><%=erro%></div>
+    <%}%>
+
+    <div class="w-full h-screen flex items-center justify-center">
+      <form
+        class="flex flex-col gap-10 border border-solid border-[#ccc] rounded-xl w-[400px] p-5 shadow-lg"
+        action="/login"
+        method="post"
+      >
+        <div class="flex flex-col gap-2 text-center">
+          <h1 class="text-3xl font-bold">Login</h1>
+          <p class="text-[#575757]">Insira suas credenciais e faça o login.</p>
         </div>
-        <%}%>
-
-        <div class="bg-[red] h-[200px] w-[200px]"></div>
-
-    <form class="bg-[blue] p-10" action="/login" method="post" >
-        <label>E-mail</label>
-        <input name="email" type="text" required>
-        <label>Senha</label>
-        <input name="senha" type="password" required>
-        <button type="submit">Enviar</button>
-    </form>
-</body>
+        <div class="flex flex-col gap-2">
+          <label>E-mail</label>
+          <input
+            class="border border-solid border-[#ccc] p-3 rounded-lg text-sm"
+            name="email"
+            type="text"
+            placeholder="teste@email.com"
+            required
+          />
+          <label>Senha</label>
+          <input
+            class="border border-solid border-[#ccc] p-3 rounded-lg text-sm"
+            name="senha"
+            type="password"
+            placeholder="********"
+            required
+          />
+          <a
+            class="text-sm w-fit h-[20px] transition-all duration-300 hover:border-b hover:border-solid hover:border-black"
+            href="/cadastro"
+            >Não tem uma conta? Cadastre-se</a
+          >
+        </div>
+        <button class="bg-black text-white p-3 rounded-xl mt-3" type="submit">
+          Entrar
+        </button>
+      </form>
+    </div>
+  </body>
 </html>
