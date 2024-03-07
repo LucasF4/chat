@@ -49,9 +49,10 @@
       }
 
       .mymessage2 {
-        background-color: #d3e6fd;
+        background-color: rgb(101, 134, 254);
         padding: 10px;
         border-radius: 5px;
+        color: white;
       }
 
       .outhermessage {
@@ -66,9 +67,10 @@
       }
 
       .outhermessage2 {
-        background-color: #fff;
+        background-color: rgb(48, 51, 70);
         padding: 10px;
         border-radius: 5px;
+        color: rgb(81, 84, 103);
       }
 
       /* #chat {
@@ -83,7 +85,7 @@
       } */
     </style>
   </head>
-  <body class="bg-gray-200 w-full flex h-screen gap-8">
+  <body class="bg-gray-200 w-full flex h-screen gap-8 overflow-hidden">
     <header class="bg-white w-[300px] h-full flex flex-col justify-between p-5">
       <nav class="">
         <ul class="flex flex-col gap-2 text-[#949494]">
@@ -100,13 +102,12 @@
     </header>
     <main class="bg-white w-full">
       <div class="w-full flex">
-        <div class="max-w-[500px] w-full h-screen px-5">
-          <h3>Chat</h3>
-          <hr />
+        <div class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] border-x">
+          <h3 class="p-3 text-white">Conversas</h3>
           <% if(friends != undefined || friends != null){ %> <%
           friends.forEach(function(friend){ %>
           <div
-            class="friend_id flex items-center gap-2 py-2"
+            class="friend_id flex items-center gap-2 py-2 hover:cursor-pointer mb-2"
             user="<%= friend.name %>"
             data-id="<%= friend._id %>"
           >
@@ -115,8 +116,8 @@
               src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
               alt=""
             />
-            <div class="flex flex-col">
-              <p><%= friend.name %></p>
+            <div class="flex justify-between items-center w-full">
+              <p class="text-white"><%= friend.name %></p>
               <% if(friend.is_online == '1'){ %>
               <p class="online" id="<%= friend._id %>-status">Online</p>
               <% }else{ %>
@@ -124,29 +125,29 @@
               <% } %>
             </div>
           </div>
-          <hr />
           <% }) %> <% }else{ %>
           <p>Não há usuários</p>
           <% } %>
         </div>
 
-        <div class="flex flex-col w-full h-screen">
-          <div id="username" class="w-full p-5"></div>
-          <div id="withoutMessage" class="bg-[rgb(34,_49,_74)] h-screen w-full"><p class="h-screen flex items-center justify-center text-white text-base font-extrabold">Sem nenhuma mensagem selecionada</p></div>
+        <div class="flex flex-col w-full h-screen bg-[rgb(29,_31,_43)] p-3">
+          <div id="username" class="w-full p-5 bg-[rgb(37,_40,_55)] text-white font-bold rounded-lg hidden"></div>
+          <div id="withoutMessage" class="bg-[rgb(29,_31,_43)] h-screen w-full"><p class="h-screen flex items-center justify-center text-white text-base font-extrabold">Sem nenhuma mensagem selecionada</p></div>
           <div
             id="chat"
-            class="bg-[rgb(34,_49,_74)] overflow-y-auto w-full h-screen"
+            class="bg-[rgb(29,_31,_43)] overflow-y-auto w-full h-screen"
           ></div>
           <form
             id="chat-form"
-            class="w-full bg-[rgb(34,_49,_74)] flex items-center p-[15px]"
+            class="w-full bg-[rgb(29,_31,_43)] flex items-center p-[15px]"
           >
             <textarea
               rows="1"
               cols="0"
+              style="background-color: rgb(48, 51, 70); border: none; user-select: none; color: white;"
               class="message-input"
               id="message"
-              placeholder="Enter Message"
+              placeholder="Message..."
               type="text"
             ></textarea>
             <button type="sumit"
@@ -177,6 +178,7 @@
           received_id = id;
           //$('#nome-client').append('Teste')
           $("#withoutMessage").addClass('hidden')
+          $("#username").removeClass('hidden')
           $("#chat").show();
           $("#chat-form").show();
           socket.emit("existsChat", {
