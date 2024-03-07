@@ -17,9 +17,7 @@
       }
 
       .message-input {
-        width: calc(
-          100% - 200px
-        ); /* Subtrai a largura das margens do campo de entrada */
+        width: 100%;
         margin-right: 10px;
         padding: 1rem;
         border: 1px solid #ccc;
@@ -97,7 +95,7 @@
       <div class="flex flex-col">
         <span>Profile</span>
         <span>Configurações</span>
-        <a href="">Logout</a>
+        <a href="/logout">Logout</a>
       </div>
     </header>
     <main class="bg-white w-full">
@@ -134,13 +132,14 @@
 
         <div class="flex flex-col w-full h-screen">
           <div id="username" class="w-full p-5"></div>
+          <div id="withoutMessage" class="bg-[rgb(34,_49,_74)] h-screen w-full"><p class="h-screen flex items-center justify-center text-white text-base font-extrabold">Sem nenhuma mensagem selecionada</p></div>
           <div
             id="chat"
-            class="bg-[rgb(34,_49,_74)] overflow-y-auto w-full"
+            class="bg-[rgb(34,_49,_74)] overflow-y-auto w-full h-screen"
           ></div>
           <form
             id="chat-form"
-            class="w-full bg-[rgb(34,_49,_74)] flex justify-around items-center p-[15px]"
+            class="w-full bg-[rgb(34,_49,_74)] flex items-center p-[15px]"
           >
             <textarea
               rows="1"
@@ -150,11 +149,14 @@
               placeholder="Enter Message"
               type="text"
             ></textarea>
-            <input
-              class="p-[10px] bg-[#007bff] text-white rounded-[5px] cursor-pointer"
-              type="submit"
-              value="Send Your Message"
-            />
+            <button type="sumit"
+                class="p-[10px] bg-[#007bff] text-white rounded-[5px] cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z" />
+                    <path d="M6.5 12h14.5" />
+                  </svg>
+            </button>
           </form>
         </div>
       </div>
@@ -174,6 +176,7 @@
           $("#username").text($(this).attr("user"));
           received_id = id;
           //$('#nome-client').append('Teste')
+          $("#withoutMessage").addClass('hidden')
           $("#chat").show();
           $("#chat-form").show();
           socket.emit("existsChat", {
