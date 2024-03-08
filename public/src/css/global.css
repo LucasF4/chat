@@ -27,3 +27,26 @@
 #chat::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.login{
+  animation: deslizar 1s forwards,
+              hidde 2s ease-in-out 1s forwards;
+}
+
+@keyframes deslizar {
+  from{
+    right: -15rem;
+  }
+  to {
+    right: 2.5rem;
+  }
+}
+
+@keyframes hidde {
+  from{
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

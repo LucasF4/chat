@@ -50,6 +50,8 @@ app.post('/login', async(req, res) => {
     const userExist = await User.findOne({email: email, senha: senha}, {senha: 0})
 
     if(userExist){
+        var success = 'Login feito com sucesso!'
+        req.flash('successLogin',success)
         req.session.user = userExist;
         res.redirect('/')
 
@@ -69,8 +71,10 @@ app.get('/logout', async (req, res) => {
 })
 
 app.get('/', auth, async (req, res) => {
+    var success = req.flash('successLogin')
+    success = (success == undefined || success.length == 0) ? undefined : success
     var friends = await User.find({_id: {$nin: [req.session.user._id]}}, {senha: 0, email: 0})
-    res.render('index', {user: req.session.user, friends: friends})
+    res.render('index', {user: req.session.user, friends: friends, success: success})
 })
 
 module.exports = app
