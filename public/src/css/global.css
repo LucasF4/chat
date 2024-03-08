@@ -6,3 +6,24 @@
 * {
   font-family: "Inter", sans-serif;
 }
+
+#chat::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+#chat::-webkit-scrollbar-track {
+  background-color: rgb(29, 31, 43);
+  border-radius: 10px;
+}
+
+
+#chat::-webkit-scrollbar-thumb {
+  background-color: rgb(59, 62, 83);
+  border-radius: 10px;
+}
+
+
+#chat::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

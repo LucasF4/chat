@@ -73,13 +73,7 @@
         color: rgb(81, 84, 103);
       }
 
-      /* #chat {
-        overflow-y: auto;
-        background-color: rgb(34, 49, 74);
-        width: 50%;
-      }
-
-      #username {
+      /* #username {
         font-weight: bold;
         font-size: 25px;
       } */
@@ -94,15 +88,38 @@
           <li><a href=""></a></li>
         </ul>
       </nav>
-      <div class="flex flex-col">
-        <span>Profile</span>
-        <span>Configurações</span>
-        <a href="/logout">Logout</a>
+
+      <div class="flex flex-col gap-3 border-t pt-8">
+        
+        <div class="flex items-center gap-4">
+          <img class="rounded-full w-[30px] h-[30px] object-cover" src="src/<%= user.image %>" alt="">
+          <span>Profile</span>
+        </div>
+        <div class="flex items-center gap-5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+            <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+          </svg>
+          <span>Configurações</span>
+        </div>
+        <div class="flex gap-5 items-center">
+          <a href="/logout">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+              <path d="M9 12h12l-3 -3" />
+              <path d="M18 15l3 -3" />
+            </svg>
+          </a>
+          <a href="/logout">Logout</a>
+        </div>
+        
       </div>
     </header>
     <main class="bg-white w-full">
       <div class="w-full flex">
-        <div class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] border-x overflow-auto">
+        <div class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] overflow-auto">
           <h3 class="p-3 text-white">Conversas</h3>
           <% if(friends != undefined || friends != null){ %> <%
           friends.forEach(function(friend){ %>
@@ -110,6 +127,7 @@
             class="friend_id flex items-center gap-2 py-2 hover:cursor-pointer mb-2"
             user="<%= friend.name %>"
             data-id="<%= friend._id %>"
+            data-src="<%= friend.image %>"
           >
             <div>
               <img
@@ -132,8 +150,11 @@
           <% } %>
         </div>
 
-        <div class="flex flex-col w-full h-screen bg-[rgb(29,_31,_43)] p-3">
-          <div id="username" class="w-full p-5 bg-[rgb(37,_40,_55)] text-white font-bold rounded-lg hidden"></div>
+        <div class="flex flex-col w-full h-screen bg-[rgb(29,_31,_43)]">
+          <div id="username" class="border-l-4 border-[rgb(29,_31,_43)] w-full p-5 bg-[rgb(37,_40,_55)] text-white font-bold hidden">
+            <img id="teste">
+            <span id="username_name"></span>
+          </div>
           <div id="withoutMessage" class="bg-[rgb(29,_31,_43)] h-screen w-full"><p class="h-screen flex items-center justify-center text-white text-base font-extrabold">Sem nenhuma mensagem selecionada</p></div>
           <div
             id="chat"
@@ -153,12 +174,12 @@
               type="text"
             ></textarea>
             <button type="sumit"
-                class="p-[10px] bg-[#007bff] text-white rounded-[5px] cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z" />
-                    <path d="M6.5 12h14.5" />
-                  </svg>
+                class="p-[10px] bg-[rgb(101,_134,_254)] rounded-[5px] cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M10 14l11 -11" />
+                  <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                </svg>
             </button>
           </form>
         </div>
@@ -176,7 +197,15 @@
 
         $(".friend_id").click(function () {
           var id = $(this).attr("data-id");
-          $("#username").text($(this).attr("user"));
+          var friendProfile = $(this).attr("data-src")
+          $("#username").addClass('flex items-center gap-4')
+          $("#username_name").text($(this).attr("user"));
+          $('#teste').attr('src', 'src/' + friendProfile).addClass('rounded-full w-[43px] h-[43px] object-cover');
+          /* $('<img>', {
+            id: 'imageProfile',
+            class: 'rounded-full w-[40px] h-[40px]',
+            src: "src/images/pexels.jpg"
+          }).appendTo('#username') */
           received_id = id;
           //$('#nome-client').append('Teste')
           $("#withoutMessage").addClass('hidden')
