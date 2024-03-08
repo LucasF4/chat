@@ -102,7 +102,7 @@
     </header>
     <main class="bg-white w-full">
       <div class="w-full flex">
-        <div class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] border-x">
+        <div class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] border-x overflow-auto">
           <h3 class="p-3 text-white">Conversas</h3>
           <% if(friends != undefined || friends != null){ %> <%
           friends.forEach(function(friend){ %>
@@ -111,11 +111,13 @@
             user="<%= friend.name %>"
             data-id="<%= friend._id %>"
           >
-            <img
-              class="w-10 h-10"
-              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-              alt=""
-            />
+            <div>
+              <img
+                class="w-[55px] h-[55px] rounded-full object-cover"
+                src="src/<%= friend.image %>"
+                alt=""
+              />
+            </div>
             <div class="flex justify-between items-center w-full">
               <p class="text-white"><%= friend.name %></p>
               <% if(friend.is_online == '1'){ %>
@@ -145,7 +147,7 @@
               rows="1"
               cols="0"
               style="background-color: rgb(48, 51, 70); border: none; user-select: none; color: white;"
-              class="message-input"
+              class="message-input focus:outline-none"
               id="message"
               placeholder="Message..."
               type="text"
