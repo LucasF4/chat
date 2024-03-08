@@ -70,7 +70,7 @@
         background-color: rgb(48, 51, 70);
         padding: 10px;
         border-radius: 5px;
-        color: rgb(81, 84, 103);
+        color: rgb(90, 93, 110);
       }
 
       /* #username {
@@ -165,7 +165,10 @@
             <img id="teste">
             <span id="username_name"></span>
           </div>
-          <div id="withoutMessage" class="bg-[rgb(29,_31,_43)] h-screen w-full"><p class="h-screen flex items-center justify-center text-white text-base font-extrabold">No Message Selected Yet!</p></div>
+          <div id="withoutMessage" class="bg-[rgb(29,_31,_43)] h-screen w-full flex justify-center items-center flex-col">
+            <img class="w-[500px] h-[500px]" src="/src/images/no_message.png" alt="">
+            <p class="flex items-center justify-center text-white text-base">No Message Selected Yet!</p>
+          </div>
           <div
             id="chat"
             class="bg-[rgb(29,_31,_43)] overflow-y-auto w-full h-screen"
@@ -236,15 +239,13 @@
       });
 
       socket.on("getOnlineUser", function (data) {
-        $("#" + data.user_id + "-status").text("Online");
-        $("#" + data.user_id + "-status").removeClass("offline");
-        $("#" + data.user_id + "-status").addClass("online");
+        $("#" + data.user_id + "-status").removeClass("bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
+        $("#" + data.user_id + "-status").addClass("bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
       });
 
       socket.on("getOfflineUser", function (data) {
-        $("#" + data.user_id + "-status").text("Offline");
-        $("#" + data.user_id + "-status").removeClass("online");
-        $("#" + data.user_id + "-status").addClass("offline");
+        $("#" + data.user_id + "-status").removeClass("bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
+        $("#" + data.user_id + "-status").addClass("bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
       });
 
       //Chat save of user
