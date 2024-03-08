@@ -348,8 +348,15 @@
         scrollChat();
       });
 
-      addEventListener("keypress", function (event) {
-        console.log(event);
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          
+          $("#withoutMessage").removeClass('hidden')
+          $("#username").addClass('hidden')
+          $("#chat").hide();
+          $("#chat-form").hide();
+
+        }
       });
     </script>
   </body>
