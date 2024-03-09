@@ -134,7 +134,7 @@
           <% if(friends != undefined || friends != null){ %> <%
           friends.forEach(function(friend){ %>
           <div
-            class="friend_id flex items-center gap-2 py-2 hover:cursor-pointer mb-2"
+            class="friend_id flex items-center gap-2 p-2 hover:cursor-pointer hover:bg-[rgb(29,_31,_43)] mb-2"
             user="<%= friend.name %>"
             data-id="<%= friend._id %>"
             data-src="<%= friend.image %>"
@@ -153,6 +153,7 @@
             </div>
             <div class="flex justify-between items-center w-full">
               <p class="text-white"><%= friend.name %></p>
+              <div class="flex justify-center items-center w-7 h-7 bg-[rgb(60,_65,_103)] right-0 rounded-full after:content-['0'] text-white"></div>
             </div>
           </div>
           <% }) %> <% }else{ %>
@@ -322,7 +323,6 @@
 
         var chats = data.chat;
         let html = "";
-
         console.log(chats);
 
         for (let i = 0; i < chats.length; i++) {
@@ -336,6 +336,7 @@
           html += `
                     <div class="${className}">
                         <div class="${className}2"><h5>${chats[i]["message"]}</h5></div>
+                        <div class="text-white">${chats[i].date_send}</div>
                     </div>
                 `;
         }

@@ -12,6 +12,10 @@ const chatSchema = new mongoose.Schema({
     message: {
         type: String,
         required: true
+    },
+    date_send: {
+        type: String,
+        required: true
     }
 },
 {timestamp: true})
