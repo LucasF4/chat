@@ -40,8 +40,10 @@ app.post('/register', async (req, res) => {
 
 app.get('/login', (req, res) => {
     var erro = req.flash('erroLogin')
+    var email = req.flash('email')
     erro = (erro == undefined || erro.length == 0) ? undefined : erro
-    res.render('user/login', {erro: erro})
+    email = (email == undefined || email.length == 0) ? undefined : email
+    res.render('user/login', {erro: erro, email: email})
 })
 
 app.post('/login', async(req, res) => {
@@ -57,7 +59,9 @@ app.post('/login', async(req, res) => {
 
     }else{
         var erro = `Credenciais Incorretas`
+        var email = email
         req.flash("erroLogin", erro)
+        req.flash('email', email)
         res.redirect('/login')
     }
 })

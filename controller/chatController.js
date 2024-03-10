@@ -5,7 +5,7 @@ const moment = require('moment')
 
 app.post('/save-messages', auth, async(req, res) => {
     var { message, received_id, sender_id } = req.body
-    var today = moment().format('DD/MM/YYYY hh:mm:ss')
+    var today = moment().format('DD/MM/YYYY HH:mm:ss')
 
     var chat = new Chat({
         send_id: sender_id,

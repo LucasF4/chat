@@ -136,7 +136,7 @@
           <div
             class="friend_id flex items-center gap-2 p-2 hover:cursor-pointer hover:bg-[rgb(29,_31,_43)] mb-2"
             user="<%= friend.name %>"
-            data-id="<%= friend._id %>"
+            id="<%= friend._id %>"
             data-src="<%= friend.image %>"
           >
             <div class="relative">
@@ -151,9 +151,8 @@
                 <div class="bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0" id="<%= friend._id %>-status"></div>
                 <% } %>
             </div>
-            <div class="flex justify-between items-center w-full">
+            <div id="not" class="flex justify-between items-center w-full">
               <p class="text-white"><%= friend.name %></p>
-              <div class="flex justify-center items-center w-7 h-7 bg-[rgb(60,_65,_103)] right-0 rounded-full after:content-['0'] text-white"></div>
             </div>
           </div>
           <% }) %> <% }else{ %>
@@ -186,6 +185,7 @@
               id="message"
               placeholder="Message..."
               type="text"
+              required
             ></textarea>
             <button type="sumit"
                 class="p-[10px] bg-[rgb(101,_134,_254)] rounded-[5px] cursor-pointer">
@@ -200,17 +200,62 @@
       </div>
     </main>
 
+    <audio id="audio">
+      <source preload="auto" src="/src/audio/notification.mp3" type="audio/mpeg">
+    </audio>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
+
       var user_id = "<%= user._id %>";
       var received_id;
+      var id_old;
+
+      const reloadHours = function (){
+        const date = new Date();
+
+        let hours = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
+        let minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
+        //let seconds = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+
+        let time_atual = hours + ':' + minutes
+
+        return time_atual;
+      }
+
+      function tocarNotificacao(){
+        var audio = document.getElementById('audio')
+        audio.play()
+      }
+
       $(document).ready(function () {
+
         $("#chat").hide();
         $("#chat-form").hide();
 
         $(".friend_id").click(function () {
-          var id = $(this).attr("data-id");
+
+          /* if(id_old === id){
+            $('#'+id_old).removeClass('bg-[rgb(29,_31,_43)]')
+          } */
+
+          var id = $(this).attr("id");
+          console.log('id do meu amiguinho: ', id)
+          console.log('ID antigo:', id_old)
+          $('#'+id).addClass('bg-[rgb(29,_31,_43)]')
+          if(id_old != id){
+            $('#'+id_old).removeClass('bg-[rgb(29,_31,_43)]')
+          }
+
+          id_old = id;
+
+          var classID = $(this).has('#sino')
+          if(classID.length > 0){
+            $(this).find('#sino').remove()
+            $('#'+id).addClass('bg-[rgb(29,_31,_43)]')
+          }
+
           var friendProfile = $(this).attr("data-src")
           $("#username").addClass('flex items-center gap-4')
           $("#username_name").text($(this).attr("user"));
@@ -254,8 +299,9 @@
         event.preventDefault();
 
         var message = $("#message").val();
+        socket.emit('notification', {received_id: received_id, send_id: user_id})
 
-        $.ajax({
+        /* $.ajax({
           url: "/save-messages",
           type: "POST",
           data: {
@@ -268,8 +314,10 @@
 
             if (response.data.send_id == user_id) {
               var className = "mymessage";
+              var classHour = "text-white text-right text-[11px]"
             } else {
               var className = "outhermessage";
+              var classHour = "text-white text-left text-[11px]"
             }
 
             if (response.success) {
@@ -277,8 +325,11 @@
               var chat = response.data.message;
               var html = `
                         <div class="${className}">
-                            <div class="${className}2">
-                                <h5>${chat}</h5>
+                            <div>
+                              <div class="${className}2">
+                                  <h5>${chat}</h5>
+                              </div>
+                              <div class="${classHour}">${reloadHours()}</div>  
                             </div>
                         </div>
                     `;
@@ -290,33 +341,60 @@
               alert(response.msg);
             }
           },
-        });
+        }); */
       });
 
       socket.on("loadNewChat", function (res) {
-        console.log("------- aqui -------");
-        console.log(res);
 
         if (user_id === res.receive_id && received_id == res.send_id) {
           if (res.send_id == user_id) {
             var className = "mymessage";
+            var classHour = "text-white text-right text-[11px]"
           } else {
             var className = "outhermessage";
+            var classHour = "text-white text-left text-[11px]"
           }
 
           let html = `
                     <div class="${className}">
-                        <div class="${className}2">
-                            <h5>${res.message}</h5>
+                        <div>
+                          <div class="${className}2">
+                              <h5>${res.message}</h5>
+                          </div>
+                          <div class="${classHour}">${reloadHours()}</div>  
                         </div>
                     </div>
                 `;
           $("#chat").append(html);
 
           scrollChat();
-          //socket.emit('notification', {not: true})
         }
       });
+
+      socket.on('mynotification', function(data){
+        var classID = document.getElementById(data.send_id)
+        console.log('classID_id_old: ', classID, ' - ', data.send_id)
+
+        if(classID.classList.contains('bg-[rgb(29,_31,_43)]')){
+          return;
+        }
+
+        let html = '';
+        var exist = document.getElementById('sino')
+        
+        if(data.received_id == user_id){
+          console.log('send_id:', data.send_id)
+          console.log('receive_id / user_id', data.received_id + ' ' + user_id)
+          html += `<svg id="sino" class="w-7 h-7 fill-azul-claro stroke-azul-escuro group-hover:animate-sino" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                  </svg>`
+        }
+        tocarNotificacao()
+        if(exist == null){
+          $('#'+data.send_id).append(html)
+        }
+      })
 
       socket.on("oldChat", function (data) {
         $("#chat").html("");
@@ -330,15 +408,31 @@
           console.log("user_id: ", user_id);
           if (chats[i].send_id == user_id) {
             var className = "mymessage";
+            var classHour = "text-white text-right text-[11px]"
           } else {
             var className = "outhermessage";
+            var classHour = "text-white text-left text-[11px]"
           }
-          html += `
+
+          if(chats[i].message.includes('http')){
+            html += `
                     <div class="${className}">
-                        <div class="${className}2"><h5>${chats[i]["message"]}</h5></div>
-                        <div class="text-white">${chats[i].date_send}</div>
+                        <div>
+                          <div class="${className}2"><img src="${chats[i]["message"]}"></div>
+                          <div class="${classHour}">${(chats[i].date_send).substring(10, 16)}</div>  
+                        </div>
+                    </div>
+            `
+          }else{
+            html += `
+                    <div class="${className}">
+                        <div>
+                          <div class="${className}2"><h5>${chats[i]["message"]}</h5></div>
+                          <div class="${classHour}">${(chats[i].date_send).substring(10, 16)}</div>  
+                        </div>
                     </div>
                 `;
+          }
         }
 
         $("#chat").append(html);
@@ -363,6 +457,7 @@
       document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
           
+          $('#'+id_old).removeClass('bg-[rgb(29,_31,_43)]')
           $("#withoutMessage").removeClass('hidden')
           $("#username").addClass('hidden')
           $("#chat").hide();

@@ -73,9 +73,9 @@ io.on('connection', async (socket)=>{
         socket.emit('oldChat', {chat: chat})
     })
 
-    /* socket.on('notification', function(data){
-        console.log(data)
-    }) */
+    socket.on('notification', function(data){
+        socket.broadcast.emit('mynotification', data)
+    })
 
 })
 

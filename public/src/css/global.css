@@ -33,6 +33,10 @@
               hidde 2s ease-in-out 1s forwards;
 }
 
+#sino{
+  animation: notification 0.31s ease-in-out infinite;
+}
+
 @keyframes deslizar {
   from{
     right: -15rem;
@@ -48,5 +52,14 @@
   }
   to {
     opacity: 0;
+  }
+}
+
+@keyframes notification {
+  0%, 100%{
+    transform: rotate(-10deg);
+  }
+  50%{
+    transform: rotate(10deg);
   }
 }
