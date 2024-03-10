@@ -301,7 +301,7 @@
         var message = $("#message").val();
         socket.emit('notification', {received_id: received_id, send_id: user_id})
 
-        /* $.ajax({
+        $.ajax({
           url: "/save-messages",
           type: "POST",
           data: {
@@ -341,7 +341,7 @@
               alert(response.msg);
             }
           },
-        }); */
+        });
       });
 
       socket.on("loadNewChat", function (res) {
