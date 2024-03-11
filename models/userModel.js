@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     is_online: {
         type: String,
         required: true
+    },
+    notification: {
+        type: Boolean,
+        required: true
     }
 },
 {timestamp: true})

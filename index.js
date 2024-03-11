@@ -60,15 +60,21 @@ io.on('connection', async (socket)=>{
         socket.broadcast.emit('getOfflineUser', {user_id: userId})
     })
 
-    socket.on('newChat', function(data){
+    socket.on('newChat', async function(data){
+        await User.findByIdAndUpdate({_id: data.send_id}, {$set: {notification: true}})
         socket.broadcast.emit('loadNewChat', data)
     })
 
     socket.on('existsChat', async function(data){
+
+        console.log(data.receive_id)
+
         var chat = await Chat.find({ $or: [
             {send_id: data.send_id, receive_id: data.receive_id},
             {send_id: data.receive_id, receive_id: data.send_id}
         ]})
+
+        await User.findByIdAndUpdate({_id: data.receive_id}, {$set: {notification: false}})
 
         socket.emit('oldChat', {chat: chat})
     })

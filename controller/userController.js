@@ -78,6 +78,8 @@ app.get('/', auth, async (req, res) => {
     var success = req.flash('successLogin')
     success = (success == undefined || success.length == 0) ? undefined : success
     var friends = await User.find({_id: {$nin: [req.session.user._id]}}, {senha: 0, email: 0})
+    console.log(friends)
+    console.log(friends[1].notification)
     res.render('index', {user: req.session.user, friends: friends, success: success})
 })
 
