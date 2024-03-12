@@ -90,46 +90,89 @@
       </nav>
 
       <% if(success){ %>
-        <div class="flex items-center gap-2 bg-green-500 absolute bottom-16 p-3 text-white login">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M5 12l5 5l10 -10" />
-          </svg>
-          <p>Login Feito com Sucesso</p>
-        </div>
+      <div
+        class="flex items-center gap-2 bg-green-500 absolute bottom-16 p-3 text-white login"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-check"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="white"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 12l5 5l10 -10" />
+        </svg>
+        <p>Login Feito com Sucesso</p>
+      </div>
       <% } %>
 
       <div class="flex flex-col gap-3 border-t pt-8">
-        
         <div class="flex items-center gap-4">
-          <img class="rounded-full w-[30px] h-[30px] object-cover" src="src/<%= user.image %>" alt="">
+          <img
+            class="rounded-full w-[30px] h-[30px] object-cover"
+            src="src/<%= user.image %>"
+            alt=""
+          />
           <span>Profile</span>
         </div>
         <div class="flex items-center gap-5">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-settings"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#2c3e50"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"
+            />
             <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
           </svg>
           <span>Settings</span>
         </div>
         <div class="flex gap-5 items-center">
           <a href="/logout">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-logout"
+              width="25"
+              height="25"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#2c3e50"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+              />
               <path d="M9 12h12l-3 -3" />
               <path d="M18 15l3 -3" />
             </svg>
           </a>
           <a href="/logout">Logout</a>
         </div>
-        
       </div>
     </header>
     <main class="bg-white w-full">
       <div class="w-full flex">
-        <div class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] overflow-auto">
+        <div
+          class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] overflow-auto"
+        >
           <h3 class="p-3 text-white">Conversas</h3>
           <% if(friends != undefined || friends != null){ %> <%
           friends.forEach(function(friend){ %>
@@ -140,25 +183,43 @@
             data-src="<%= friend.image %>"
           >
             <div class="relative">
-              <img
-                class="w-[55px] h-[55px] rounded-full object-cover"
-                src="src/<%= friend.image %>"
-                alt=""
-              />
+              <div class="w-[55px] h-[55px]">
+                <img
+                  class="w-full h-full rounded-full object-cover"
+                  src="src/<%= friend.image %>"
+                  alt=""
+                />
+              </div>
               <% if(friend.is_online == '1'){ %>
-                <div class="bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0" id="<%= friend._id %>-status"></div>
-                <% }else{ %>
-                <div class="bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0" id="<%= friend._id %>-status"></div>
-                <% } %>
+              <div
+                class="bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0"
+                id="<%= friend._id %>-status"
+              ></div>
+              <% }else{ %>
+              <div
+                class="bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0"
+                id="<%= friend._id %>-status"
+              ></div>
+              <% } %>
             </div>
             <div id="not" class="flex justify-between items-center w-full">
               <p class="text-white"><%= friend.name %></p>
             </div>
             <% if(friend.notification){ %>
-              <svg id="sino" class="w-7 h-7 fill-azul-claro stroke-azul-escuro group-hover:animate-sino" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-              </svg>
+            <svg
+              id="sino"
+              class="w-7 h-7 fill-azul-claro stroke-azul-escuro group-hover:animate-sino"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              ></path>
+            </svg>
             <% } %>
           </div>
           <% }) %> <% }else{ %>
@@ -167,13 +228,25 @@
         </div>
 
         <div class="flex flex-col w-full h-screen bg-[rgb(29,_31,_43)]">
-          <div id="username" class="border-l-4 border-[rgb(29,_31,_43)] w-full p-5 bg-[rgb(37,_40,_55)] text-white font-bold hidden">
-            <img id="teste">
+          <div
+            id="username"
+            class="border-l-4 border-[rgb(29,_31,_43)] w-full p-5 bg-[rgb(37,_40,_55)] text-white font-bold hidden"
+          >
+            <img id="teste" />
             <span id="username_name"></span>
           </div>
-          <div id="withoutMessage" class="bg-[rgb(29,_31,_43)] h-screen w-full flex justify-center items-center flex-col">
-            <img class="w-[500px] h-[500px]" src="/src/images/no_message.png" alt="">
-            <p class="flex items-center justify-center text-white text-base">No Message Selected Yet!</p>
+          <div
+            id="withoutMessage"
+            class="bg-[rgb(29,_31,_43)] h-screen w-full flex justify-center items-center flex-col"
+          >
+            <img
+              class="w-[500px] h-[500px]"
+              src="/src/images/no_message.png"
+              alt=""
+            />
+            <p class="flex items-center justify-center text-white text-base">
+              No Message Selected Yet!
+            </p>
           </div>
           <div
             id="chat"
@@ -186,20 +259,40 @@
             <textarea
               rows="1"
               cols="0"
-              style="background-color: rgb(48, 51, 70); border: none; user-select: none; color: white;"
+              style="
+                background-color: rgb(48, 51, 70);
+                border: none;
+                user-select: none;
+                color: white;
+              "
               class="message-input focus:outline-none"
               id="message"
               placeholder="Message..."
               type="text"
               required
             ></textarea>
-            <button type="sumit"
-                class="p-[10px] bg-[rgb(101,_134,_254)] rounded-[5px] cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M10 14l11 -11" />
-                  <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
-                </svg>
+            <button
+              type="sumit"
+              class="p-[10px] bg-[rgb(101,_134,_254)] rounded-[5px] cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-send"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="white"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M10 14l11 -11" />
+                <path
+                  d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
+                />
+              </svg>
             </button>
           </form>
         </div>
@@ -207,65 +300,70 @@
     </main>
 
     <audio id="audio">
-      <source preload="auto" src="/src/audio/notification.mp3" type="audio/mpeg">
+      <source
+        preload="auto"
+        src="/src/audio/notification.mp3"
+        type="audio/mpeg"
+      />
     </audio>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
-
       var user_id = "<%= user._id %>";
       var received_id;
       var id_old;
 
-      const reloadHours = function (){
+      const reloadHours = function () {
         const date = new Date();
 
-        let hours = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
-        let minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
+        let hours =
+          date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        let minutes =
+          date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         //let seconds = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
 
-        let time_atual = hours + ':' + minutes
+        let time_atual = hours + ":" + minutes;
 
         return time_atual;
-      }
+      };
 
-      function tocarNotificacao(){
-        var audio = document.getElementById('audio')
-        audio.play()
+      function tocarNotificacao() {
+        var audio = document.getElementById("audio");
+        audio.play();
       }
 
       $(document).ready(function () {
-
         $("#chat").hide();
         $("#chat-form").hide();
 
         $(".friend_id").click(function () {
-
           /* if(id_old === id){
             $('#'+id_old).removeClass('bg-[rgb(29,_31,_43)]')
           } */
 
           var id = $(this).attr("id");
-          console.log('id do meu amiguinho: ', id)
-          console.log('ID antigo:', id_old)
-          $('#'+id).addClass('bg-[rgb(29,_31,_43)]')
-          if(id_old != id){
-            $('#'+id_old).removeClass('bg-[rgb(29,_31,_43)]')
+          console.log("id do meu amiguinho: ", id);
+          console.log("ID antigo:", id_old);
+          $("#" + id).addClass("bg-[rgb(29,_31,_43)]");
+          if (id_old != id) {
+            $("#" + id_old).removeClass("bg-[rgb(29,_31,_43)]");
           }
 
           id_old = id;
 
-          var classID = $(this).has('#sino')
-          if(classID.length > 0){
-            $(this).find('#sino').remove()
-            $('#'+id).addClass('bg-[rgb(29,_31,_43)]')
+          var classID = $(this).has("#sino");
+          if (classID.length > 0) {
+            $(this).find("#sino").remove();
+            $("#" + id).addClass("bg-[rgb(29,_31,_43)]");
           }
 
-          var friendProfile = $(this).attr("data-src")
-          $("#username").addClass('flex items-center gap-4')
+          var friendProfile = $(this).attr("data-src");
+          $("#username").addClass("flex items-center gap-4");
           $("#username_name").text($(this).attr("user"));
-          $('#teste').attr('src', 'src/' + friendProfile).addClass('rounded-full w-[43px] h-[43px] object-cover');
+          $("#teste")
+            .attr("src", "src/" + friendProfile)
+            .addClass("rounded-full w-[43px] h-[43px] object-cover");
           /* $('<img>', {
             id: 'imageProfile',
             class: 'rounded-full w-[40px] h-[40px]',
@@ -273,8 +371,8 @@
           }).appendTo('#username') */
           received_id = id;
           //$('#nome-client').append('Teste')
-          $("#withoutMessage").addClass('hidden')
-          $("#username").removeClass('hidden')
+          $("#withoutMessage").addClass("hidden");
+          $("#username").removeClass("hidden");
           $("#chat").show();
           $("#chat-form").show();
           socket.emit("existsChat", {
@@ -291,13 +389,21 @@
       });
 
       socket.on("getOnlineUser", function (data) {
-        $("#" + data.user_id + "-status").removeClass("bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
-        $("#" + data.user_id + "-status").addClass("bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
+        $("#" + data.user_id + "-status").removeClass(
+          "bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0"
+        );
+        $("#" + data.user_id + "-status").addClass(
+          "bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0"
+        );
       });
 
       socket.on("getOfflineUser", function (data) {
-        $("#" + data.user_id + "-status").removeClass("bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
-        $("#" + data.user_id + "-status").addClass("bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0");
+        $("#" + data.user_id + "-status").removeClass(
+          "bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0"
+        );
+        $("#" + data.user_id + "-status").addClass(
+          "bg-gray-500 rounded-full border border-white w-4 h-4 absolute bottom-0 right-0"
+        );
       });
 
       //Chat save of user
@@ -305,7 +411,10 @@
         event.preventDefault();
 
         var message = $("#message").val();
-        socket.emit('notification', {received_id: received_id, send_id: user_id})
+        socket.emit("notification", {
+          received_id: received_id,
+          send_id: user_id,
+        });
 
         $.ajax({
           url: "/save-messages",
@@ -320,10 +429,10 @@
 
             if (response.data.send_id == user_id) {
               var className = "mymessage";
-              var classHour = "text-white text-right text-[11px]"
+              var classHour = "text-white text-right text-[11px]";
             } else {
               var className = "outhermessage";
-              var classHour = "text-white text-left text-[11px]"
+              var classHour = "text-white text-left text-[11px]";
             }
 
             if (response.success) {
@@ -351,14 +460,13 @@
       });
 
       socket.on("loadNewChat", function (res) {
-
         if (user_id === res.receive_id && received_id == res.send_id) {
           if (res.send_id == user_id) {
             var className = "mymessage";
-            var classHour = "text-white text-right text-[11px]"
+            var classHour = "text-white text-right text-[11px]";
           } else {
             var className = "outhermessage";
-            var classHour = "text-white text-left text-[11px]"
+            var classHour = "text-white text-left text-[11px]";
           }
 
           let html = `
@@ -377,30 +485,30 @@
         }
       });
 
-      socket.on('mynotification', function(data){
-        var classID = document.getElementById(data.send_id)
-        console.log('classID_id_old: ', classID, ' - ', data.send_id)
+      socket.on("mynotification", function (data) {
+        var classID = document.getElementById(data.send_id);
+        console.log("classID_id_old: ", classID, " - ", data.send_id);
 
-        if(classID.classList.contains('bg-[rgb(29,_31,_43)]')){
+        if (classID.classList.contains("bg-[rgb(29,_31,_43)]")) {
           return;
         }
 
-        let html = '';
-        var exist = document.getElementById('sino')
-        
-        if(data.received_id == user_id){
-          console.log('send_id:', data.send_id)
-          console.log('receive_id / user_id', data.received_id + ' ' + user_id)
+        let html = "";
+        var exist = document.getElementById("sino");
+
+        if (data.received_id == user_id) {
+          console.log("send_id:", data.send_id);
+          console.log("receive_id / user_id", data.received_id + " " + user_id);
           html += `<svg id="sino" class="w-7 h-7 fill-azul-claro stroke-azul-escuro group-hover:animate-sino" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                  </svg>`
+                  </svg>`;
         }
-        tocarNotificacao()
-        if(exist == null){
-          $('#'+data.send_id).append(html)
+        tocarNotificacao();
+        if (exist == null) {
+          $("#" + data.send_id).append(html);
         }
-      })
+      });
 
       socket.on("oldChat", function (data) {
         $("#chat").html("");
@@ -414,27 +522,35 @@
           console.log("user_id: ", user_id);
           if (chats[i].send_id == user_id) {
             var className = "mymessage";
-            var classHour = "text-white text-right text-[11px]"
+            var classHour = "text-white text-right text-[11px]";
           } else {
             var className = "outhermessage";
-            var classHour = "text-white text-left text-[11px]"
+            var classHour = "text-white text-left text-[11px]";
           }
 
-          if(chats[i].message.includes('http')){
+          if (chats[i].message.includes("http")) {
             html += `
                     <div class="${className}">
                         <div>
-                          <div class="${className}2"><img src="${chats[i]["message"]}"></div>
-                          <div class="${classHour}">${(chats[i].date_send).substring(10, 16)}</div>  
+                          <div class="${className}2"><img src="${
+              chats[i]["message"]
+            }"></div>
+                          <div class="${classHour}">${chats[
+              i
+            ].date_send.substring(10, 16)}</div>  
                         </div>
                     </div>
-            `
-          }else{
+            `;
+          } else {
             html += `
                     <div class="${className}">
                         <div>
-                          <div class="${className}2"><h5>${chats[i]["message"]}</h5></div>
-                          <div class="${classHour}">${(chats[i].date_send).substring(10, 16)}</div>  
+                          <div class="${className}2"><h5>${
+              chats[i]["message"]
+            }</h5></div>
+                          <div class="${classHour}">${chats[
+              i
+            ].date_send.substring(10, 16)}</div>  
                         </div>
                     </div>
                 `;
@@ -460,15 +576,13 @@
         scrollChat();
       });
 
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-          
-          $('#'+id_old).removeClass('bg-[rgb(29,_31,_43)]')
-          $("#withoutMessage").removeClass('hidden')
-          $("#username").addClass('hidden')
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          $("#" + id_old).removeClass("bg-[rgb(29,_31,_43)]");
+          $("#withoutMessage").removeClass("hidden");
+          $("#username").addClass("hidden");
           $("#chat").hide();
           $("#chat-form").hide();
-
         }
       });
     </script>
