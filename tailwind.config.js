@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./views/**/*.{ejs,js}"],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        "menu-slide": "menu-slide 0.5s ease-in-out forwards",
+      },
+    },
   },
   plugins: [],
 };

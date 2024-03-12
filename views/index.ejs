@@ -44,7 +44,7 @@
         flex-direction: row-reverse;
         flex-wrap: wrap-reverse;
         margin: 10px;
-        font-size: 20px;
+
         /* float: right; */
       }
 
@@ -53,6 +53,7 @@
         padding: 10px;
         border-radius: 5px;
         color: white;
+        font-size: 15px;
       }
 
       .outhermessage {
@@ -62,7 +63,7 @@
         padding: 10px;
         border-radius: 5px;
         margin: 10px;
-        font-size: 20px;
+
         /* float: left; */
       }
 
@@ -70,7 +71,8 @@
         background-color: rgb(48, 51, 70);
         padding: 10px;
         border-radius: 5px;
-        color: rgb(90, 93, 110);
+        color: white;
+        font-size: 15px;
       }
 
       /* #username {
@@ -79,8 +81,8 @@
       } */
     </style>
   </head>
-  <body class="bg-gray-200 w-full flex h-screen gap-8 overflow-hidden">
-    <header class="bg-white w-[300px] h-full flex flex-col justify-between p-5">
+  <body class="bg-gray-200 w-full flex h-screen overflow-hidden">
+    <header class="flex bg-white w-[300px] h-full flex-col justify-between p-5">
       <nav class="">
         <ul class="flex flex-col gap-2 text-[#949494]">
           <li><a href="">Chats</a></li>
@@ -173,17 +175,37 @@
         <div
           class="max-w-[500px] w-full h-screen px-5 bg-[rgb(37,_40,_55)] overflow-auto"
         >
-          <h3 class="p-3 text-white">Conversas</h3>
+          <div class="flex items-center justify-between p-3">
+            <!-- Svg menu -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-align-justify text-white cursor-pointer"
+              id="menuIcon"
+            >
+              <line x1="3" x2="21" y1="6" y2="6" />
+              <line x1="3" x2="21" y1="12" y2="12" />
+              <line x1="3" x2="21" y1="18" y2="18" />
+            </svg>
+            <h3 class="text-white text-right">Conversas</h3>
+          </div>
           <% if(friends != undefined || friends != null){ %> <%
           friends.forEach(function(friend){ %>
           <div
-            class="friend_id flex items-center gap-2 p-2 hover:cursor-pointer hover:bg-[rgb(29,_31,_43)] mb-2"
+            class="friend_id flex items-center gap-2 p-2 hover:rounded-xl hover:cursor-pointer hover:bg-[rgb(29,_31,_43)] border-b border-[#252837] shadow-md"
             user="<%= friend.name %>"
             id="<%= friend._id %>"
             data-src="<%= friend.image %>"
           >
             <div class="relative">
-              <div class="w-[55px] h-[55px]">
+              <div class="w-[45px] h-[45px]">
                 <img
                   class="w-full h-full rounded-full object-cover"
                   src="src/<%= friend.image %>"
@@ -230,7 +252,7 @@
         <div class="flex flex-col w-full h-screen bg-[rgb(29,_31,_43)]">
           <div
             id="username"
-            class="border-l-4 border-[rgb(29,_31,_43)] w-full p-5 bg-[rgb(37,_40,_55)] text-white font-bold hidden"
+            class="border-l-4 border-[rgb(29,_31,_43)] w-full p-3 bg-[rgb(37,_40,_55)] text-white font-bold hidden"
           >
             <img id="teste" />
             <span id="username_name"></span>
@@ -583,6 +605,14 @@
           $("#username").addClass("hidden");
           $("#chat").hide();
           $("#chat-form").hide();
+        }
+      });
+
+      $("#menuIcon").click(function () {
+        if ($("header").is(":visible")) {
+          $("header").hide();
+        } else {
+          $("header").show();
         }
       });
     </script>
