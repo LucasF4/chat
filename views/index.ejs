@@ -608,7 +608,8 @@
         }
       });
 
-      $("#menuIcon").click(function () {
+      $("#menuIcon").click(function (e) {
+        e.preventDefault();
         if ($("header").is(":visible")) {
           $("header").hide();
         } else {
