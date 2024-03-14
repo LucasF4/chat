@@ -75,6 +75,15 @@
         font-size: 15px;
       }
 
+      .triangle {
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 100px solid red;
+        transform: rotate(270deg);
+      }
+
       /* #username {
         font-weight: bold;
         font-size: 25px;
@@ -110,7 +119,7 @@
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M5 12l5 5l10 -10" />
         </svg>
-        <p>Login Feito com Sucesso</p>
+        <p><%= success %></p>
       </div>
       <% } %>
 
@@ -121,8 +130,9 @@
             src="src/<%= user.image %>"
             alt=""
           />
-          <span>Profile</span>
+          <span><%= user.name %></span>
         </div>
+        <!-- <div class="triangle"></div> -->
         <div class="flex items-center gap-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -612,6 +622,7 @@
         e.preventDefault();
         if ($("header").is(":visible")) {
           $("header").hide();
+          $('.login').hide()
         } else {
           $("header").show();
         }
