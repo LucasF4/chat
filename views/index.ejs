@@ -75,14 +75,36 @@
         font-size: 15px;
       }
 
-      .triangle {
-        width: 0;
-        height: 0;
-        border-left: 50px solid transparent;
-        border-right: 50px solid transparent;
-        border-bottom: 100px solid red;
-        transform: rotate(270deg);
+      .balao{
+          background: #fff;
+          border: 2px solid lightgray;
+          border-radius: 30px;
+          width: 10%;
+          height: fit-content;
+          margin-bottom: 1em;
       }
+
+      .balao::after{
+          /* content necessário para a criação de um elemento vazio */
+          content: "";
+
+          width: 0; 
+          height: 0;
+
+          /* position: absolute para manipularmos a posição da seta */
+          position: absolute;
+
+          /* Right com valor negativo para ele ficar para fora do balão de dialogo */
+          left: -20px;
+          bottom: 27px;
+          /* E aqui o truque com as bordas */
+          /* 50px é a metade da altura do elemento, assim temos uma seta da mesma altura que nosso elemento */
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+          border-left: 20px solid lightgray;
+                   
+          transform: rotate(180deg);
+        }
 
       /* #username {
         font-weight: bold;
@@ -122,17 +144,46 @@
         <p><%= success %></p>
       </div>
       <% } %>
-
       <div class="flex flex-col gap-3 border-t pt-8">
-        <div class="flex items-center gap-4">
+
+        <!-- DIV DO USUÁRIO -->
+        <div class="flex items-center gap-4 group">
           <img
             class="rounded-full w-[30px] h-[30px] object-cover"
             src="src/<%= user.image %>"
             alt=""
           />
           <span><%= user.name %></span>
-        </div>
-        <!-- <div class="triangle"></div> -->
+          <div 
+            class="bg-green-500 rounded-full border border-white w-4 h-4 absolute bottom-[88px] left-[38px]">
+          </div>
+          <!-- div do balão -->
+          <div class="balao absolute bottom-[45px] left-[150px] invisible group-hover:visible p-5">
+            <ul>
+              <li class="status-list">
+                <div class="flex items-center gap-3">
+                  <div class="rounded-full w-3 h-3 bg-green-500"></div><p>Disponível</p>
+                </div>
+              </li>
+              <li class="status-list">
+                <div class="flex items-center gap-3">
+                  <div class="rounded-full w-3 h-3 bg-red-500"></div><p>Ocupdo</p>
+                </div>
+              </li>
+              <li class="status-list">
+                <div class="flex items-center gap-3">
+                  <div class="rounded-full w-3 h-3 bg-yellow-500"></div><p>Ausente</p>
+                </div>
+              </li>
+              <li class="status-list">
+                <div class="flex items-center gap-3">
+                  <div class="rounded-full w-3 h-3 bg-gray-500"></div><p>Invisível</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div> 
+
         <div class="flex items-center gap-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -341,6 +392,15 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+
+      $('.status-list').click(() => {
+        $(this).click((index)=> {
+          console.log($(index)[0]['target'])
+        })
+      })
+
+    </script>
     <script>
       var user_id = "<%= user._id %>";
       var received_id;

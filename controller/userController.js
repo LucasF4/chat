@@ -67,7 +67,8 @@ app.post('/login', async(req, res) => {
 })
 
 app.get('/logout', async (req, res) => {
-    var erro = `Usuário Desconectado`
+    var erro = ''
+    req.session.user != undefined ? erro = `Usuário Desconectado` : erro = ''
     req.flash('erroLogin', erro)
     req.session.user = undefined
     res.redirect('/login')
