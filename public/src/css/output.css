@@ -574,52 +574,20 @@ video {
   bottom: 45px;
 }
 
-.left-\[150px\]{
-  left: 150px;
-}
-
-.right-0{
-  right: 0px;
-}
-
-.left-\[0px\]{
-  left: 0px;
-}
-
-.bottom-\[50px\]{
-  bottom: 50px;
-}
-
-.bottom-\[150px\]{
-  bottom: 150px;
-}
-
-.bottom-\[100px\]{
-  bottom: 100px;
-}
-
-.bottom-\[85px\]{
-  bottom: 85px;
-}
-
-.left-\[10px\]{
-  left: 10px;
-}
-
-.left-\[20px\]{
-  left: 20px;
-}
-
-.left-\[35px\]{
-  left: 35px;
-}
-
 .bottom-\[88px\]{
   bottom: 88px;
 }
 
+.left-\[150px\]{
+  left: 150px;
+}
+
 .left-\[38px\]{
   left: 38px;
+}
+
+.right-0{
+  right: 0px;
 }
 
 .mt-3{
